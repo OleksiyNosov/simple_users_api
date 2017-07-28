@@ -35,4 +35,26 @@ RSpec.describe UsersController, type: :controller do
 
     it { should render_template :create }
   end
+
+  describe '#update' do
+    let(:params) { { name: 'NewName' } }
+
+    let(:user) { stub_model User }
+
+    before { expect(user).to receive(:update) }
+
+    before { process :update, method: :patch, params: params, format: :json }
+
+    it { should render_template :update }
+  end
+
+  describe '#destroy' do
+    let(:user) { stub_model User }
+
+    before { expect(user).to receive(:destroy) }
+
+    before { process :destroy, method: :delete, format: :json }
+
+    it { should render_template :destroy }
+  end
 end
