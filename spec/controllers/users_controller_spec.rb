@@ -7,6 +7,13 @@ RSpec.describe UsersController, type: :controller do
     it { should render_template :index }
   end
 
+  describe '#resourse' do
+
+    before { expect(User).to receive(:find).and_return(:resource) }
+
+    its(:resource) { should eq :resource }
+  end
+
   describe '#collection' do
     context do
       before { expect(User).to  receive(:all).and_return(:collection) }
