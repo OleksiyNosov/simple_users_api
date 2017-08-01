@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
   private
   def resource
     @user ||= User.find params[:id]
@@ -17,5 +16,4 @@ class UsersController < ApplicationController
   def collection
     @users ||= User.all
   end
-
 end
