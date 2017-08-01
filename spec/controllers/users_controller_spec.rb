@@ -8,18 +8,15 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#resourse' do
-
     before { expect(User).to receive(:find).and_return(:resource) }
 
     its(:resource) { should eq :resource }
   end
 
   describe '#collection' do
-    context do
-      before { expect(User).to  receive(:all).and_return(:collection) }
+    before { expect(User).to  receive(:all).and_return(:collection) }
 
-      its(:collection) { should eq :collection }
-    end
+    its(:collection) { should eq :collection }
   end
 
   describe '#create' do
@@ -41,19 +38,25 @@ RSpec.describe UsersController, type: :controller do
 
     let(:user) { stub_model User }
 
-    before { expect(user).to receive(:update) }
+    before { expect(User).to receive(:find).and_return(user) }
 
-    before { process :update, method: :patch, params: params, format: :json }
+    before { expect(user).to receive(:update!).with(permit! params) }
+
+    before { process :update, method: :patch, params: params.merge(id: 1), format: :json }
 
     it { should render_template :update }
   end
 
   describe '#destroy' do
+    let(:params) { { id: 1 } }
+
     let(:user) { stub_model User }
 
-    before { expect(user).to receive(:destroy) }
+    before { expect(User).to receive(:find).and_return(user) }
 
-    before { process :destroy, method: :delete, format: :json }
+    before { expect(user).to receive(:destroy!) }
+
+    before { process :destroy, method: :delete, params: params, format: :json }
 
     it { should render_template :destroy }
   end
