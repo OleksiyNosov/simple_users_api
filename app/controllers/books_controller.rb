@@ -6,14 +6,18 @@ private
   end
 
   def build_resource
-    @book = Book.new resource_params
+    @book = parent.books.build resource_params
   end
 
   def resource_params
-    params.permit(:title, :author, :year, :user_id)
+    params.require(:book).permit(:title, :author, :year)
   end
 
   def collection
-    @books ||= User.find(params[:user_id]).books
+    @books ||= parent.books
+  end
+
+  def parent
+    User.find params[:user_id]
   end
 end
