@@ -1,11 +1,9 @@
 class Book < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true
-  validates :author, presence: true
-  validates :user_id, presence: true
+  validates :title, :author, :user_id, presence: true
 
-  after_create :set_default_year
+  before_create :set_default_year
 
   private
   def set_default_year
