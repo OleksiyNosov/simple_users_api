@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails', '~> 5.1.2'
+gem 'rails'
 gem 'sqlite3'
 gem 'puma'
 gem 'bcrypt'
@@ -22,7 +22,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
+  gem 'pry-rails'
   gem 'listen'
 end
 
