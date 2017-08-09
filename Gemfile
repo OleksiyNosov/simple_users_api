@@ -7,13 +7,11 @@ end
 
 
 gem 'rails'
-gem 'sqlite3'
+gem 'pg'
 gem 'puma'
 gem 'bcrypt'
 
 group :development, :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rspec-its'
   gem 'rspec-activemodel-mocks'
