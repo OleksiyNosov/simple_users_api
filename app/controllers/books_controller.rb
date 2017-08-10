@@ -10,7 +10,7 @@ private
   end
 
   def resource_params
-    params.permit(:title, :author, :year)
+    params.require(:book).permit(:title, :author, :year)
   end
 
   def collection
