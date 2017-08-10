@@ -8,6 +8,7 @@ class UserDecorator < ApplicationDecorator
       id: id,
       name: name,
       email: email,
+      books_counter: books_counter,
       books: books
     }
   end
