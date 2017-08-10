@@ -13,6 +13,7 @@ gem 'bcrypt'
 gem 'draper'
 gem 'validates_email_format_of'
 gem 'rails-observers'
+gem 'redis'
 gem 'sidekiq'
 
 group :development, :test do

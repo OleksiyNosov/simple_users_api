@@ -191,6 +191,7 @@ DEPENDENCIES
   rails
   rails-controller-testing
   rails-observers
+  redis
   rspec-activemodel-mocks
   rspec-its
   rspec-rails
