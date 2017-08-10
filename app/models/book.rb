@@ -5,7 +5,7 @@ class Book < ApplicationRecord
 
   before_create :set_default_year
 
-  after_create :refresh_book_counter
+  after_commit :refresh_book_counter, on: :create
 
   private
   def set_default_year
