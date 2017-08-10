@@ -10,7 +10,7 @@ private
   end
 
   def resource_params
-    params.require(:book).permit(:title, :author, :year)
+    params.permit(:title, :author, :year)
   end
 
   def collection
@@ -18,6 +18,6 @@ private
   end
 
   def parent
-    User.find params[:user_id]
+    @parent ||= User.find params[:user_id]
   end
 end

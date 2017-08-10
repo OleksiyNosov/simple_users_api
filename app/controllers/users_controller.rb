@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def resource_params
-    params.permit(:name)
+    params.permit(:name, :email)
   end
 
   def collection
