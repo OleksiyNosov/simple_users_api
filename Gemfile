@@ -12,6 +12,8 @@ gem 'puma'
 gem 'bcrypt'
 gem 'draper'
 gem 'validates_email_format_of'
+gem 'rails-observers'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'rspec-rails'
