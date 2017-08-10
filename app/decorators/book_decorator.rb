@@ -3,11 +3,14 @@ class BookDecorator < ApplicationDecorator
 
   def as_json *args
     {
-      user_name: user.name,
-      user_id:   user.id,
-      title:     title,
-      author:    author,
-      year:      year 
-    }
+      title: title,
+      author: author,
+      year: year
+    }.tap do |hash| 
+      unless context[:brief]
+        hash[:user_id] = user.id
+        hash[:user_name] = user.name
+      end
+    end
   end
 end
