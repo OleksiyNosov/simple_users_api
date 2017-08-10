@@ -1,9 +1,9 @@
 class CounterBookJob < ApplicationJob
   queue_as :default
 
-  def refresh user_id
+  def perform user_id
     user = User.find user_id
 
-    user.update book_counter: (user.book_counter + 1)
+    user.increment! :book_counter
   end 
 end

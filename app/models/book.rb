@@ -13,6 +13,6 @@ class Book < ApplicationRecord
   end 
 
   def refresh_book_counter
-    CounterBookJob.refresh_later user.id
+    CounterBookJob.perform_later user.id
   end
 end
