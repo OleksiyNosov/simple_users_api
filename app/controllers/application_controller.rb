@@ -5,6 +5,16 @@ class ApplicationController < ActionController::Base
 
   helper_method :collection, :resource
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    @exception = exception
+
+    render :exception
+  end
+
+  rescue_from ActiveRecord::RecordInvalid, ActiveModel::StrictValidationFailed do
+    render :errors, status: :unprocessable_entity
+  end
+
   def show
     resource
   end

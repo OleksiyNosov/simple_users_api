@@ -18,6 +18,6 @@ private
   end
 
   def parent
-    User.find params[:user_id]
+    @parent ||= User.find params[:user_id]
   end
 end

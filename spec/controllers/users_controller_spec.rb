@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  it { should be_an ApplicationController }
+
   describe '#index' do
     before { process :index, method: :get, format: :json }
 
@@ -14,13 +16,13 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#collection' do
-    before { expect(User).to  receive(:all).and_return(:collection) }
+    before { expect(User).to receive(:all).and_return(:collection) }
 
     its(:collection) { should eq :collection }
   end
 
   describe '#create' do
-    let(:params) { { name: 'Sam' } }
+    let(:params) { { name: 'Sam', email: 'user@example.com' } }
 
     let(:user) { stub_model User }
 
@@ -34,7 +36,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#update' do
-    let(:params) { { name: 'NewName' } }
+    let(:params) { { name: 'NewName', email: 'user@example.com' } }
 
     let(:user) { stub_model User }
 
