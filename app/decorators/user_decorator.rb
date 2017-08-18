@@ -3,13 +3,8 @@ class UserDecorator < ApplicationDecorator
 
   decorates_association :books, context: { brief: true }
 
-  def as_json *args
-    {
-      id: id,
-      name: name,
-      email: email,
-      books_counter: books_counter,
-      books: books
-    }
+  private
+  def _only
+    %I[id name email books_counter books]
   end
 end

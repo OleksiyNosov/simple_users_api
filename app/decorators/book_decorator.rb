@@ -1,16 +1,14 @@
 class BookDecorator < ApplicationDecorator
   delegate_all
 
-  def as_json *args
-    {
-      title: title,
-      author: author,
-      year: year
-    }.tap do |hash| 
-      unless context[:brief]
-        hash[:user_id] = user.id
-        hash[:user_name] = user.name
-      end
-    end
+  private
+  def _only
+    only = %I[title author year]
+  end
+
+  def _methods
+    [] unless context[:brief]
+      
+    %I[user_id user_name]
   end
 end
