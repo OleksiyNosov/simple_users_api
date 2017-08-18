@@ -24,21 +24,9 @@ RSpec.describe BooksController, type: :controller do
     end
 
     before { expect(book).to receive(:save!) }
-
    
     before { process :create, method: :post, params: params, format: :json }
 
     it { should render_template :create }
-  end
-
-  describe '#parent' do
-    before do
-      #
-      # subject.parent.books -> :books
-      #
-      expect(subject).to receive(:parent) do
-        double.tap { |a| expect(a).to receive(:books).and_return(:books) }
-      end
-    end
   end
 end
