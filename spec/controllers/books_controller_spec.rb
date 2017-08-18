@@ -35,7 +35,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe '#create' do
-    let(:book_params) { { title: 'Tom Soyer', author: "Mark Twain", year: '1920' } }
+    let(:book_params) { { title: 'Tom Soyer', author: 'Mark Twain', year: '1920' } }
 
     let(:params) { { book: book_params, user_id: '1' } }
 
@@ -62,7 +62,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe '#update' do
-    let(:book_params) { { title: 'Tom Soyer', author: "Mark Twain", year: '1920' } }
+    let(:book_params) { { title: 'Tom Soyer', author: 'Mark Twain', year: '1920' } }
 
     let(:params) { { book: book_params, id: '1', user_id: '1' } }
 
