@@ -9,12 +9,6 @@ RSpec.describe UsersController, type: :controller do
     it { should render_template :index }
   end
 
-  describe '#resourse' do
-    before { expect(User).to receive(:find).and_return(:resource) }
-
-    its(:resource) { should eq :resource }
-  end
-
   describe '#collection' do
     before { expect(User).to receive(:all).and_return(:collection) }
 
@@ -22,11 +16,11 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#create' do
-    let(:params) { { name: 'Sam', email: 'user@example.com' } }
+    let(:params) { { user: { name: 'Sam', email: 'user@example.com' }, id: '1' } }
 
     let(:user) { stub_model User }
 
-    before { expect(User).to receive(:new).with(permit! params).and_return(user) }
+    before { expect(User).to receive(:new).with(permit! name: 'Sam', email: 'user@example.com').and_return(user) }
 
     before { expect(user).to receive(:save!) }
 
@@ -36,15 +30,15 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#update' do
-    let(:params) { { name: 'NewName', email: 'user@example.com' } }
+    let(:params) { { user: { name: 'Sam', email: 'user@example.com' }, id: '1' } }
 
     let(:user) { stub_model User }
 
-    before { expect(User).to receive(:find).and_return(user) }
+    before { expect(User).to receive(:find).with('1').and_return(user) }
 
-    before { expect(user).to receive(:update!).with(permit! params) }
+    before { expect(user).to receive(:update!).with(permit! name: 'Sam', email: 'user@example.com') }
 
-    before { process :update, method: :patch, params: params.merge(id: 1), format: :json }
+    before { process :update, method: :patch, params: params, format: :json }
 
     it { should render_template :update }
   end
@@ -54,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
 
     let(:user) { stub_model User }
 
-    before { expect(User).to receive(:find).and_return(user) }
+    before { expect(User).to receive(:find).with('1').and_return(user) }
 
     before { expect(user).to receive(:destroy!) }
 

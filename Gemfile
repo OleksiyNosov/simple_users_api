@@ -18,6 +18,9 @@ gem 'sidekiq'
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :test do
   gem 'rspec-its'
   gem 'rspec-activemodel-mocks'
   gem 'rails-controller-testing'
