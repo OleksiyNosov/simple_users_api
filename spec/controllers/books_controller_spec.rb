@@ -4,7 +4,7 @@ RSpec.describe BooksController, type: :controller do
   it { should be_an ApplicationController }
 
   describe '#index' do
-  let(:params) { { user_id: '1' } }    
+    let(:params) { { user_id: '1' } }
 
     before { process :index, method: :get, params: params, format: :json }
 
@@ -73,6 +73,9 @@ RSpec.describe BooksController, type: :controller do
     before { expect(User).to receive(:find).with('1').and_return(parent) }
 
     before do
+      #
+      # parent.books.find -> book
+      #
       expect(parent).to receive(:books) do
         double.tap { |a| expect(a).to receive(:find).with('1').and_return(book) }
       end
@@ -83,5 +86,30 @@ RSpec.describe BooksController, type: :controller do
     before { process :update, method: :post, params: params, format: :json }
 
     it { should render_template :update }
+  end
+
+  describe '#destroy' do
+    let(:params) { { id: '1', user_id: '1' } }
+
+    let(:book) { stub_model Book }
+
+    let(:parent) { stub_model User }
+
+    before { expect(User).to receive(:find).with('1').and_return(parent) }
+
+    before do
+      #
+      # parent.books.find -> book
+      #
+      expect(parent).to receive(:books) do
+        double.tap { |a| expect(a).to receive(:find).and_return(book) }
+      end
+    end
+
+    before { expect(book).to receive(:destroy!) }
+
+    before { process :destroy, method: :delete, params: params, format: :json }
+
+    it { should render_template :destroy }
   end
 end
